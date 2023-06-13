@@ -41,6 +41,16 @@ spec:
             cpu: 300m
       volumes:
       - name: my-volume
-        hostPath:
-          path: /var/my-app
-          type: DirectoryOrCreate
+        persistentVolumeClaim:
+          claimName: my-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
